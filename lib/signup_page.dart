@@ -63,6 +63,8 @@ class _SignUpPageState extends State<SignUpPage> {
     setState(() => _isSigningIn = true);
 
     try {
+      // Sign out first to ensure account selection dialog always appears if needed
+      await _googleSignIn.signOut();
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
         setState(() => _isSigningIn = false);
@@ -78,13 +80,18 @@ class _SignUpPageState extends State<SignUpPage> {
 
       await FirebaseAuth.instance.signInWithCredential(credential);
 
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const Home()),
-      );
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const Home()),
+        );
+      }
     } catch (e) {
+      debugPrint("Google Sign-Up Error: $e");
       setState(() => _isSigningIn = false);
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Google sign-in failed: $e')));
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Google sign-in failed: $e')));
+      }
     }
   }
 

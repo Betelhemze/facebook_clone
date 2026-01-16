@@ -7,56 +7,53 @@ class NotificationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // No AppBar per your request
-
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          children: const [
-            _SectionHeader(title: 'New'),
-            const TopNavBar(),
-            _NotificationItem(
-              leading: _CircleIcon(
-                color: Color(0xFF1877F2),
-                child: Text(
-                  'f',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 20,
+        child: Column(
+          children: [
+            const TopNavBar(activeIndex: 4),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                children: const [
+                  _SectionHeader(title: 'New'),
+                  _NotificationItem(
+                    leading: _CircleIcon(
+                      color: Color(0xFF1877F2),
+                      child: Text(
+                        'f',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    title: 'We noticed a new login from a device or location that you don\'t usually use. Please review.',
+                    time: '13d',
+                    hasMenu: true,
                   ),
-                ),
+                  _NotificationItem(
+                    leading: _AvatarStack(),
+                    title: 'You have new friend suggestions: Mulugeta Yikuno, Nuraden Sultane and Beza Tefera.',
+                    time: '12d',
+                    trailing: Icon(Icons.person_add_alt_1, color: Color(0xFF1877F2)),
+                  ),
+                  _NotificationItem(
+                    leading: _ShieldIcon(),
+                    title: 'Learn how Meta will use your info in new ways to personalise your experiences.',
+                    time: '55d',
+                    hasMenu: true,
+                  ),
+                  _NotificationItem(
+                    leading: _CircleIcon(
+                      color: Color(0xFFEDEFF2),
+                      child: Icon(Icons.person, color: Colors.grey),
+                    ),
+                    title: 'Blast to the past with your post from March 2022.',
+                    time: '12d',
+                  ),
+                ],
               ),
-              title:
-              'We noticed a new login from a device or location that you don\'t usually use. Please review.',
-              time: '13d',
-              hasMenu: true,
-            ),
-
-            _NotificationItem(
-              leading: _AvatarStack(),
-              title:
-              'You have new friend suggestions: Mulugeta Yikuno, Nuraden Sultane and Beza Tefera.',
-              time: '12d',
-              trailing: Icon(Icons.person_add_alt_1, color: Color(0xFF1877F2)),
-            ),
-
-            _NotificationItem(
-              leading: _ShieldIcon(),
-              title:
-              'Learn how Meta will use your info in new ways to personalise your experiences.',
-              time: '55d',
-              hasMenu: true,
-            ),
-
-            _NotificationItem(
-              leading: _CircleIcon(
-                color: Color(0xFFEDEFF2),
-                child: Icon(Icons.person, color: Colors.grey),
-              ),
-              title: 'Blast to the past with your post from March 2022.',
-              time: '12d',
-              // small blue f badge could be added to leading if desired
             ),
           ],
         ),

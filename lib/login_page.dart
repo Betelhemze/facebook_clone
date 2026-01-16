@@ -36,6 +36,8 @@ class _LoginPageState extends State<LoginPage> {
     setState(() => _isSigningIn = true);
 
     try {
+      // Sign out first to ensure account selection dialog always appears if needed
+      await _googleSignIn.signOut();
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
       if (googleUser == null) {
@@ -55,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
 
       _goHome();
     } catch (e) {
+      debugPrint("Google Sign-In Error: $e");
       setState(() => _isSigningIn = false);
       _showMessage('Google sign-in failed: $e');
     }

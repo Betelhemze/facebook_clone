@@ -13,12 +13,20 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(//widget
-          "facebook",
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
+        title: GestureDetector(
+          onTap: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const Home()),
+            );
+          },
+          child: const Text(
+            "facebook",
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         actions: [ // list of widgets inside the
@@ -45,7 +53,7 @@ class Home extends StatelessWidget {
 
       body: ListView(
         children: [
-          const TopNavBar(),
+          const TopNavBar(activeIndex: 0),
           Divider(height: 1, thickness: 0.5, color: Colors.grey[300]),
           SizedBox(height: 15),
 
